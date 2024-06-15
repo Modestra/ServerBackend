@@ -6,3 +6,7 @@ class Person(models.Model):
 
     def __str__(self):
         return self.name;
+class User(models.Model):
+    email = models.EmailField()
+    login = models.CharField(max_length=40)
+    password = models.CharField(max_length=40)
