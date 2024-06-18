@@ -4,4 +4,4 @@ from backend.models import Person
 class PersonSerializer(serializers.ListSerializer):
     class Meta:
         model = Person
-        field = '__all__'
+        field = ['name', 'age']
