@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'backend',
     'RedOx',
+    'CheckNotes',
     'rest_framework_simplejwt',
     'drf_yasg',
     'cooking.apps.CookingConfig',
