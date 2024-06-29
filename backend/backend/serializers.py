@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from backend.models import Person
+from backend.models import User
 
-class PersonSerializer(serializers.ListSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Person
-        field = ['name', 'age']
+        model = User
+        field = ['username', 'age', 'userage', 'email']
