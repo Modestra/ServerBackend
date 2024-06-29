@@ -28,9 +28,12 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
     #backend
-    path('user/', TestApiView.as_view(), name="user"),
+    path('user/', UserApiView.as_view(), name="user"),
+    path('login/', LoginApiView.as_view(), name="login"),
     path('register/', RegisterApiView.as_view(), name="register"),
+
     # Подключение других проектов
     path('api/v2', include('CheckNotes.urls')),
     path('api/v3', include('RedOx.urls'))

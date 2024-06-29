@@ -1,6 +1,5 @@
-from django.shortcuts import render
-from .serializers import UserSerializer
-from rest_framework import (generics, status, serializers, viewsets)
+from .serializers import (UserSerializer, ShortUserSerializer)
+from rest_framework import (status, viewsets)
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -24,7 +23,11 @@ class PersonApiView(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         return super().update(request, *args, **kwargs)
 
-class TestApiView(APIView):
+class UserApiView(APIView):
+
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         el = User.objects.all().values()
         return Response({'users': list(el)})
@@ -33,14 +36,19 @@ class TestApiView(APIView):
 
 class RegisterApiView(APIView):
 
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-
     def post(self, request):
         serialize = UserSerializer(data=request.data)
         if serialize.is_valid():
             serialize.save()
             return Response(serialize.data, status=status.HTTP_201_CREATED)
         else:
+            return Response({'error': "Пользователя не удалось авторизовать"}, status=status.HTTP_401_UNAUTHORIZED)
+class LoginApiView(APIView):
+
+    def post(self, request):
+        serializer = ShortUserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
             return Response({'error': "Пользователь не зарегистрирован"}, status=status.HTTP_401_UNAUTHORIZED)
-        
