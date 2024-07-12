@@ -8,9 +8,9 @@ services:
     env_file: ./backend/.env
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: DockerFile
     ports:
-      - 8000:8000
+      - 8080:8080
     networks:
       - backend
     depends_on:
