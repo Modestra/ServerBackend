@@ -128,7 +128,7 @@ if DATABASE == 'sqlite':
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-else:
+elif DATABASE == 'postgres':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
