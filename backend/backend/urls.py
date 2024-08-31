@@ -8,6 +8,9 @@ from backend.views import *
 from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
 from RedOx.views import NoteApiView
 
+get_user = AuthViewSet.as_view({"get": "list"})
+set_user = AuthViewSet.as_view({"post": "set_user"})
+
 schema_view = get_schema_view(
    openapi.Info(
       title="Snippets API",
@@ -22,6 +25,9 @@ schema_view = get_schema_view(
 )
 
 app_name = "backend"
+
+router = routers.DefaultRouter()
+router.register(r'auth', AuthViewSet)
 urlpatterns = [
     #Системные 
     path('admin/', admin.site.urls),
@@ -31,12 +37,11 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
     #backend
-    path('', include('djoser.urls')),
-    path('user/', UserApiView.as_view(), name="user"),
-    path('login/', LoginApiView.as_view(), name="login"),
-    path('register/', UserViewSet.as_view({'get': 'list'}), name="register"),
+    path('user', get_user),
+    path('create', set_user),
 
     # Подключение других проектов
-    path('api/v2', include('CheckNotes.urls')),
-    path('api/v3', include('RedOx.urls'))
+    path('api/v1/', include(router.urls)),
+    path('api/v2/', include('CheckNotes.urls')),
+    path('api/v3/', include('RedOx.urls'))
 ]
