@@ -11,6 +11,9 @@ jobs:
     name: Connection on Virtual Machine
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
+    defaults:
+      run:
+        working-directory: backend
     needs:
       - build
     steps:
@@ -37,7 +40,7 @@ jobs:
         python-version: [3.12]
     defaults:
       run:
-        working-directory: solaris
+        working-directory: backend
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
