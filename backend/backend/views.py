@@ -17,14 +17,7 @@ class AuthViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(users, many=True)
         return Response(serializer.data)
     
-    @action(detail=True, methods=["GET"])
-    def get_user(self, request):
-        users = self.get_queryset()
-        serializer = self.get_serializer(users, many=False)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    
-    @action(detail=True, methods=["GET","POST"])
-    def set_user(self, request):
+    def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

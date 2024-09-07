@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'backend',
     'RedOx',
     'CheckNotes',
+    'solarlabshop',
     'rest_framework_simplejwt',
     'drf_yasg',
     'cooking.apps.CookingConfig',
