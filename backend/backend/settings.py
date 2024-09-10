@@ -19,7 +19,9 @@ SECRET_KEY = 'django-insecure-!6#hur_c2u%0s!oltpwn6k)2x4uz*5ws-2!(r2&cdnpxe0#42d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '185.173.94.160']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '185.135.82.172']
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
@@ -35,6 +37,7 @@ INSTALLED_APPS = [
     'backend',
     'RedOx',
     'CheckNotes',
+    'solarlabshop',
     'rest_framework_simplejwt',
     'drf_yasg',
     'cooking.apps.CookingConfig',
@@ -44,8 +47,15 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
 }
+
+AUTH_USER_MODEL = 'backend.User'
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
@@ -128,7 +138,7 @@ if DATABASE == 'sqlite':
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-else:
+elif DATABASE == 'postgres':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -163,7 +173,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
