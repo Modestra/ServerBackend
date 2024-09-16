@@ -4,7 +4,7 @@ import os
 
 #Базовые конфигурационные настройки
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEFAULT_SITE_URL = os.getenv('DEFAULT_SITE_URL', default='185.135.82.172:8000') 
+DEFAULT_SITE_URL = os.getenv('DEFAULT_SITE_URL', default='185.135.82.172') 
 DATABASE = os.getenv('DATABASE', default='sqlite')
 
 RUN_TYPE = os.getenv('RUN_TYPE', default='LOCAL')

@@ -19,7 +19,8 @@ class AuthViewSet(viewsets.ModelViewSet):
     
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
+        user = User.objects.create_user(serializer, serializer)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response({"server": "None"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'user': user, 'token': user.token}, status=status.HTTP_201_CREATED)
+        return Response({"server": "Форма не валидна. Недостаточно данных"}, status=status.HTTP_400_BAD_REQUEST)
