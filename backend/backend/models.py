@@ -36,12 +36,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(db_index=True, unique=True)
     username = models.CharField(db_index=True, max_length=255, unique=True)
+    login = models.CharField(max_length=255)
     password = models.TextField()
 
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    isAdmin = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
