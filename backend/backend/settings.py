@@ -4,7 +4,7 @@ import os
 
 #Базовые конфигурационные настройки
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEFAULT_SITE_URL = os.getenv('DEFAULT_SITE_URL', default='localhost:6000') 
+DEFAULT_SITE_URL = os.getenv('DEFAULT_SITE_URL', default='185.135.82.172') 
 DATABASE = os.getenv('DATABASE', default='sqlite')
 
 RUN_TYPE = os.getenv('RUN_TYPE', default='LOCAL')
@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_yasg',
     'cooking.apps.CookingConfig',
-    'djoser'
+    'djoser',
+    'corsheaders'
 ]
 
 REST_FRAMEWORK = {
@@ -49,6 +50,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        #'solarlabshop.auth.JWTAuthenrification'
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
@@ -104,7 +106,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
