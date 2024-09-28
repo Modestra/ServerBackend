@@ -28,6 +28,10 @@ app_name = "backend"
 
 router = routers.DefaultRouter()
 router.register(r'auth', AuthApiViewSet)
+router.register(r'advert', AdvertApiViewSet)
+router.register(r'category', CategoryApiViewSet)
+router.register(r'image', ImagesApiViewSet)
+router.register(r'comment', CommentApiViewSet)
 
 urlpatterns = [
     #Системные 
