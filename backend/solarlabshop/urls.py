@@ -17,7 +17,8 @@ urlpatterns = [
     path('adverts/create', AdvertApiViewSet.as_view({'post': 'create'})),
     path('categories/', CategoryApiViewSet.as_view({"get": "list"})),
     path('categories/create', CategoryApiViewSet.as_view({'post': 'create'})),
-    path('categories/childs', CategoryApiViewSet.as_view({'get': 'childs'})),
+    #path('categories/childs', CategoryApiViewSet.as_view({'get': 'childs'})),
+    path('categories/create/child', CategoryApiViewSet.as_view({'post': 'child'})),
     path('images/', ImagesApiViewSet.as_view({'get': 'list'})),
     path('images/create', ImagesApiViewSet.as_view({'post': 'create'})),
     path('comments/', CommentApiViewSet.as_view({'get': 'childs'}))
