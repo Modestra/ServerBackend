@@ -29,7 +29,7 @@ jobs:
           script: |
             cd ${{ secrets.DIRECTORY_ROOT }}
             ls
-            git pull origin deploy
+            git pull origin develop
             bash ./scripts/docker-install.sh
 
   build:

@@ -1,6 +1,11 @@
 from rest_framework import serializers
 from solarlabshop.models import *
 
+class CategoryChildSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Categories
+        fields = ("name", "parentid")
 class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
