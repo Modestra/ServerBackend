@@ -23,6 +23,7 @@ class AvitoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advert
         fields = '__all__'
+        extends = ("advert_id")
 
 class AuthSerializer(serializers.ModelSerializer):
 
@@ -34,7 +35,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Images
-        fields = '__all__'
+        fields = ("advert_id", "image")
     
 class CommentSerializer(serializers.ModelSerializer):
 
