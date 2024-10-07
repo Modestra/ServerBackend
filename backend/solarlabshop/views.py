@@ -70,7 +70,7 @@ class AuthApiViewSet(viewsets.ModelViewSet):
 class AdvertApiViewSet(viewsets.ModelViewSet):
 
     queryset = Advert.objects.all()
-    serializer_class = AvitoSerializer
+    serializer_class = AdvertSerializer
 
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
@@ -82,7 +82,7 @@ class AdvertApiViewSet(viewsets.ModelViewSet):
     def get_by_id(self, request):
         user_id = request.GET.get("id", "3fa85f64-5717-4562-b3fc-2c963f66afa6")
         adverts = Advert.objects.filter(user_id=user_id)
-        serializer = AvitoSerializer(adverts, many=True)
+        serializer = AdvertSerializer(adverts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ImagesApiViewSet(viewsets.ModelViewSet):
