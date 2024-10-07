@@ -18,15 +18,14 @@ class CategoryApiViewSet(viewsets.ModelViewSet):
     def childs(self, request, *args, **kwargs):
         category_id = request.GET.get("id", "579a1ed96a0f48f2b6262e9dcfdec242")
         category_list = Categories.objects.filter(parentid=category_id)
-        serializer = CategoryAllSerializer(category_list, many=True)
+        serializer = CategorySerializer(category_list, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            category = Categories.objects.get(name=request.data["name"])
-            return Response({"userid": category.category_id, "name": category.name, "parentid": category.parentid}, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
     
     def list(self, request, *args, **kwargs):
@@ -71,7 +70,11 @@ class AdvertApiViewSet(viewsets.ModelViewSet):
         return super().list(request, *args, **kwargs)
     
     def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
     
 class ImagesApiViewSet(viewsets.ModelViewSet):
 

@@ -45,6 +45,7 @@ class Categories(models.Model):
 class Advert(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.UUIDField()
+    advert_id = models.UUIDField(default=uuid.uuid4)
     name = models.CharField(max_length=255, blank=False)
     description = models.TextField(blank=True)
     cost = models.PositiveBigIntegerField()
@@ -55,7 +56,7 @@ class Advert(models.Model):
 
 class Images(models.Model):
     id = models.AutoField(primary_key=True)
-    image_id = models.UUIDField(blank=False)
+    image_id = models.UUIDField()
     image = models.ImageField(upload_to='images/')
 
 class Comments(models.Model):
