@@ -10,19 +10,15 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Categories
-        fields = ("name", "parentid")
-
-class CategoryAllSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Categories
         fields = '__all__'
+        read_only_fields = ['category_id']
 
-class AvitoSerializer(serializers.ModelSerializer):
+class AdvertSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Advert
         fields = '__all__'
+        read_only_fields = ['advert_id']
 
 class AuthSerializer(serializers.ModelSerializer):
 
@@ -35,6 +31,7 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Images
         fields = '__all__'
+        read_only_fields = ['advert_id']
     
 class CommentSerializer(serializers.ModelSerializer):
 
