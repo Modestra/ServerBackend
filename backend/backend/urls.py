@@ -51,5 +51,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('', include('CheckNotes.urls')),
     path('', include('RedOx.urls')),
-    path('', include('solarlabshop.urls'))
+    path('', include('solarlabshop.urls')),
+    path('vasiliq/', include('Vasiliq.urls'))
 ]

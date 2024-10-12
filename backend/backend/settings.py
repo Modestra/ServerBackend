@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'cooking.apps.CookingConfig',
     'djoser',
-    'corsheaders'
+    'corsheaders',
+    'Vasiliq'
 ]
 
 REST_FRAMEWORK = {
