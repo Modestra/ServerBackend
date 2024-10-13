@@ -4,7 +4,7 @@ from Vasiliq.models import *
 from Vasiliq.serializers import *
 
 class ClientApiViewSet(viewsets.ModelViewSet):
-    queryset = Client
+    queryset = Client.objects.all()
     serializer_class = ClientSerializer
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
@@ -13,7 +13,7 @@ class ClientApiViewSet(viewsets.ModelViewSet):
         return super().create(request, *args, **kwargs)
     
 class AdminApiViewSet(viewsets.ModelViewSet):
-    queryset = AdminModel
+    queryset = AdminModel.objects.all()
     serializer_class = AdminSerializer
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
@@ -22,7 +22,7 @@ class AdminApiViewSet(viewsets.ModelViewSet):
         return super().create(request, *args, **kwargs)
     
 class MedicalApiViewSet(viewsets.ModelViewSet):
-    queryset = Medicament
+    queryset = Medicament.objects.all()
     serializer_class = MedicamentSerializer
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
@@ -31,7 +31,7 @@ class MedicalApiViewSet(viewsets.ModelViewSet):
         return super().create(request, *args, **kwargs)
     
 class OrderApiViewSet(viewsets.ModelViewSet):
-    queryset = Order
+    queryset = Order.objects.all()
     serializer_class = OrderSerializer
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
@@ -40,7 +40,7 @@ class OrderApiViewSet(viewsets.ModelViewSet):
         return super().create(request, *args, **kwargs)
 
 class AdminApiViewSet(viewsets.ModelViewSet):
-    queryset = AdminModel
+    queryset = AdminModel.objects.all()
     serializer_class = AdminSerializer
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
@@ -49,7 +49,7 @@ class AdminApiViewSet(viewsets.ModelViewSet):
         return super().create(request, *args, **kwargs)
     
 class HistoryApiViewSet(viewsets.ModelViewSet):
-    queryset = HistoryOrder
+    queryset = HistoryOrder.objects.all()
     serializer_class = HistorySerializer
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
