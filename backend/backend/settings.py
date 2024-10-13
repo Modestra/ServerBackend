@@ -35,12 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.postgres',
     'backend',
-    'RedOx',
-    'CheckNotes',
     'solarlabshop',
     'rest_framework_simplejwt',
     'drf_yasg',
-    'cooking.apps.CookingConfig',
     'djoser',
     'corsheaders',
     'Vasiliq'
