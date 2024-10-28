@@ -19,13 +19,6 @@ class AdvertSerializer(serializers.ModelSerializer):
         model = Advert
         fields = '__all__'
         read_only_fields = ['advert_id']
-
-class AuthSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ("email", "username", "password")
-
 class ImageSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -34,7 +27,7 @@ class ImageSerializer(serializers.ModelSerializer):
         read_only_fields = ["image_id"]
     
 class CommentSerializer(serializers.ModelSerializer):
-
+    
     class Meta:
         model = Comments
         fields = '__all__'

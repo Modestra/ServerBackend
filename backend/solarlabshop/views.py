@@ -5,8 +5,8 @@ from solarlabshop.serializers import *
 from rest_framework.response import Response
 from rest_framework.decorators import action, api_view
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from solarlabshop.models import User as SolarUser
-from django.http import QueryDict
+from backend.models import User
+from backend.serializers import UserSerializer
 import json
 
 class CategoryApiViewSet(viewsets.ModelViewSet):
@@ -36,43 +36,20 @@ class CategoryApiViewSet(viewsets.ModelViewSet):
             return Response({"userid": category.category_id, "name": category.name, "parentid": category.parentid}, status=status.HTTP_201_CREATED)
         return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
 
-class AuthApiViewSet(viewsets.ModelViewSet):
-
-    queryset = SolarUser.objects.all()
-    serializer_class = AuthSerializer
-    permission_classes = [AllowAny]
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            user = SolarUser.objects.get(email=request.data["email"])
-            return Response({"user": serializer.data, "token": user.token, "user_id": user.user_id}, status=status.HTTP_201_CREATED) #Работает, если пользователь не создан
-        return Response({"error": "Было создано несколько пользователей с данным email или username"}, status=status.HTTP_400_BAD_REQUEST)
-        #return Response({"error": "Не удалось создать пользователя"}, status=status.HTTP_400_BAD_REQUEST)
-    @action(detail=False, methods=["POST"] ,permission_classes=[AllowAny])
-    def user_login(self, request):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            user = SolarUser.objects.get(username=request.data["username"])
-            return Response({"token": user.token, "user_id": user.user_id}, status=status.HTTP_201_CREATED)
-        return Response({"error": "Не удалось получить данные пользователя"}, status=status.HTTP_400_BAD_REQUEST)
-    
-    def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
-    
-    @action(detail=True, methods=["GET"])
-    def get_token(self, request):
-        data = request.GET.get('email', "default")
-        user = SolarUser.objects.get(email=data)
-        return Response({"token": user.token}, status=status.HTTP_200_OK)
-    
 class AdvertApiViewSet(viewsets.ModelViewSet):
 
     queryset = Advert.objects.all()
     serializer_class = AdvertSerializer
+    permission_classes = (AllowAny, IsAuthenticated)
+    
+    def check_permissions(self, request):
+        return super().check_permissions(request)
 
     def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
+        name = request.GET.get('name', "")
+        adverts = Advert.objects.filter(name=name)
+        serializer = AdvertSerializer(adverts, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

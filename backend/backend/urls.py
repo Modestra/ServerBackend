@@ -8,9 +8,6 @@ from backend.views import *
 from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
 from solarlabshop.views import *
 
-get_user = AuthViewSet.as_view({"get": "list"})
-set_user = AuthViewSet.as_view({"post": "set_user"})
-
 schema_view = get_schema_view(
    openapi.Info(
       title="Modestra API",
@@ -27,7 +24,7 @@ schema_view = get_schema_view(
 app_name = "backend"
 
 router = routers.DefaultRouter()
-router.register(r'auth', AuthApiViewSet)
+router.register(r'auth', AuthViewSet)
 router.register(r'advert', AdvertApiViewSet)
 router.register(r'category', CategoryApiViewSet)
 router.register(r'image', ImagesApiViewSet)
@@ -43,9 +40,9 @@ urlpatterns = [
     
     #backend
     path('users/', AuthViewSet.as_view({'get': 'list'})),
-    path('users/create/', AuthViewSet.as_view({'post': 'create'})),
-    path('auth/register/', AuthApiViewSet.as_view({'post': 'create'})),
-    path('auth/login/', AuthApiViewSet.as_view({'post': 'user_login'})),
+    #path('users/create/', AuthViewSet.as_view({'post': 'create'})),
+    path('auth/register/', AuthViewSet.as_view({'post': 'create'})),
+    #path('auth/login/', AuthViewSet.as_view({'post': 'user_login'})),
 
     # Подключение других проектов
     path('', include(router.urls)),
