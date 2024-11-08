@@ -40,12 +40,9 @@ urlpatterns = [
     
     #backend
     path('users/', AuthViewSet.as_view({'get': 'list'})),
-    #path('users/create/', AuthViewSet.as_view({'post': 'create'})),
     path('auth/register/', AuthViewSet.as_view({'post': 'create'})),
-    #path('auth/login/', AuthViewSet.as_view({'post': 'user_login'})),
 
     # Подключение других проектов
     path('', include(router.urls)),
     path('', include('solarlabshop.urls')),
-    path('vasiliq/', include('Vasiliq.urls'))
 ]
